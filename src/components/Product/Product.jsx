@@ -13,11 +13,13 @@ import useStyles from "./styles";
 
 const Product = ({
   product: {
+    id,
     name,
     description,
     price: { formatted_with_symbol },
     media: { source },
   },
+  onAddToCart,
 }) => {
   const classes = useStyles();
   return (
@@ -37,7 +39,7 @@ const Product = ({
         ></Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to Cart">
+        <IconButton aria-label="Add to Cart" onClick={() => onAddToCart(id, 1)}>
           <AddShoppingCart />
         </IconButton>
       </CardActions>
