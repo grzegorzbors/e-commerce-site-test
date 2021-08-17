@@ -1,3 +1,5 @@
+import { Link, useLocation } from "react-router-dom";
+
 import {
   AppBar,
   Toolbar,
@@ -16,11 +18,18 @@ import logo from "../../assets/logo.png";
 
 const Navbar = ({ totalItems }) => {
   const classes = useStyles();
+  const location = useLocation();
+
   return (
     <>
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
-          <Typography align="center">
+          <Typography
+            component={Link}
+            to="/"
+            align="center"
+            className={classes.title}
+          >
             <img
               src={logo}
               alt="E-Commerce Test"
@@ -30,13 +39,19 @@ const Navbar = ({ totalItems }) => {
             E-Commerce Test
           </Typography>
           <div className={classes.grow} />
-          <div className={classes.button}>
-            <IconButton aria-label="Show cart items">
-              <Badge badgeContent={totalItems} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>
+          {location.pathname === "/" && (
+            <div className={classes.button}>
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show cart items"
+              >
+                <Badge badgeContent={totalItems} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </>
